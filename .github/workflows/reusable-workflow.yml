@@ -1,13 +1,15 @@
 name: npm run build
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: ci
+    environment: "${{ inputs.environment }}"
 
     steps:
     - uses: actions/checkout@v3
